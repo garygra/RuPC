@@ -4,6 +4,8 @@ file(GLOB EXECUTABLES_PENDULUM_FILES
 set(EXECUTABLE_OUTPUT_PATH ${EXECUTABLE_OUTPUT_PATH}/pendulum )
 
 	
+find_package(Curses REQUIRED)
+
 foreach(f ${EXECUTABLES_PENDULUM_FILES})
 	GET_FILENAME_COMPONENT(F_EXEC ${f} NAME_WE )
 	add_executable(${F_EXEC} ${f})
@@ -11,13 +13,12 @@ foreach(f ${EXECUTABLES_PENDULUM_FILES})
     ${OpenCV_LIB_DIRS}
     )	
 	target_link_libraries(${F_EXEC} 
-	    ${OpenCV_LIBS} ${realsense2_LIBRARY} glfw
+	  ${OpenCV_LIBS} ${realsense2_LIBRARY} glfw
     OpenGL::GL
     )
 	target_include_directories(${F_EXEC} PUBLIC
     ${OpenCV_INCLUDE_DIRS} 
     )
-	target_link_libraries(${F_EXEC}
-		)
+	target_link_libraries(${F_EXEC} ${CURSES_LIBRARIES})
 
 endforeach()

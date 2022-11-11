@@ -30,8 +30,10 @@ link_libraries(
 find_package(Eigen3 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
+if(APPLE)
+else()
 find_package(realsense2 REQUIRED)
-
+endif()
 find_package(OpenCV CONFIG REQUIRED) 
 
 # find_package(PkgConfig REQUIRED)
@@ -42,6 +44,9 @@ find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
 
 include_directories("${PROJECT_SOURCE_DIR}/src")
+
+add_subdirectory(src/comms)
+
 link_directories("${PROJECT_SOURCE_DIR}/lib" ${Boost_LIBRARY_DIRS})
 
 add_subdirectory(executables)

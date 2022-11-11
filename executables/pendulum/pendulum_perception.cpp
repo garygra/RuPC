@@ -1,3 +1,4 @@
+#if __linux__
 // License: Apache 2.0. See LICENSE file in root directory.
 // Copyright(c) 2017 Intel Corporation. All Rights Reserved.
 
@@ -282,3 +283,13 @@ catch (const std::exception& e)
   std::cerr << e.what() << std::endl;
   return EXIT_FAILURE;
 }
+
+#elif __APPLE__
+#include <cstdio>
+int main()
+{
+  printf("%s unsupported in MacOS\n", __FILE__);
+}
+#else
+#error "Unknown compiler"
+#endif
